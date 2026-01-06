@@ -1,0 +1,126 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/data_ingestion.py
+    deps:
+    - path: data/tweet_emotions.csv
+      hash: md5
+      md5: 378e50a49c97277f1841a684687c2020
+      size: 3768210
+    - path: src/data_ingestion.py
+      hash: md5
+      md5: 2e3d008cfe1972676fcec423ced09cb6
+      size: 897
+    outs:
+    - path: data/raw/test.csv
+      hash: md5
+      md5: 8d4b3e97869bee2451638e2ac1a86c15
+      size: 426141
+    - path: data/raw/train.csv
+      hash: md5
+      md5: 4bf018fd5acbc173f00a98d157724785
+      size: 997436
+  data_preprocessing:
+    cmd: python src/data_preprocessing.py
+    deps:
+    - path: data/raw/test.csv
+      hash: md5
+      md5: 8d4b3e97869bee2451638e2ac1a86c15
+      size: 426141
+    - path: data/raw/train.csv
+      hash: md5
+      md5: 4bf018fd5acbc173f00a98d157724785
+      size: 997436
+    - path: src/data_preprocessing.py
+      hash: md5
+      md5: 1688509ea4d2e10ea1ee75660253f8fc
+      size: 1233
+    outs:
+    - path: data/processed/test_processed.csv
+      hash: md5
+      md5: 7cb01e603c9c7a4f72b02b2a179ba457
+      size: 276416
+    - path: data/processed/train_processed.csv
+      hash: md5
+      md5: 7d48fbcc29b3bf218183a0b3bfacb73e
+      size: 645499
+  feature_engineering:
+    cmd: python src/feature_engineering.py
+    deps:
+    - path: data/processed/test_processed.csv
+      hash: md5
+      md5: 7cb01e603c9c7a4f72b02b2a179ba457
+      size: 276416
+    - path: data/processed/train_processed.csv
+      hash: md5
+      md5: 7d48fbcc29b3bf218183a0b3bfacb73e
+      size: 645499
+    - path: src/feature_engineering.py
+      hash: md5
+      md5: 907e68b14cf72abc50cfce8a04010436
+      size: 1508
+    outs:
+    - path: data/features/X_test.npz
+      hash: md5
+      md5: 0dc389bcbc8827c9b1ab5d67fef162d6
+      size: 68590
+    - path: data/features/X_train.npz
+      hash: md5
+      md5: dbeb434c69846b144ff979e05ada6cde
+      size: 170077
+    - path: data/features/vectorizer.pkl
+      hash: md5
+      md5: 6f1fe15047982d7ad8006331a8608cd8
+      size: 139745
+    - path: data/features/y_test.npy
+      hash: md5
+      md5: 22502ccbdece34b281689781f7fbc00b
+      size: 45728
+    - path: data/features/y_train.npy
+      hash: md5
+      md5: dc2bd5b0583f2c2f0f4325d7dddcdc8d
+      size: 106504
+  model_building:
+    cmd: python src/model_building.py
+    deps:
+    - path: data/features/X_train.npz
+      hash: md5
+      md5: dbeb434c69846b144ff979e05ada6cde
+      size: 170077
+    - path: data/features/y_train.npy
+      hash: md5
+      md5: dc2bd5b0583f2c2f0f4325d7dddcdc8d
+      size: 106504
+    - path: src/model_building.py
+      hash: md5
+      md5: 518b445b51cfb0cdbb224394b2d3b1b8
+      size: 830
+    outs:
+    - path: data/models/xgboost_model.pkl
+      hash: md5
+      md5: 13e1670f7f2659f0eadb756ad9dc77ce
+      size: 1954233
+  model_evaluation:
+    cmd: python src/model_evaluation.py
+    deps:
+    - path: data/features/X_test.npz
+      hash: md5
+      md5: 0dc389bcbc8827c9b1ab5d67fef162d6
+      size: 68590
+    - path: data/features/y_test.npy
+      hash: md5
+      md5: 22502ccbdece34b281689781f7fbc00b
+      size: 45728
+    - path: data/models/xgboost_model.pkl
+      hash: md5
+      md5: 13e1670f7f2659f0eadb756ad9dc77ce
+      size: 1954233
+    - path: src/model_evaluation.py
+      hash: md5
+      md5: e6050bf4d65cbd530e5d9aed9db84085
+      size: 1021
+    outs:
+    - path: data/reports/metrics.json
+      hash: md5
+      md5: 01f5d23d1d3d171c282493b677d460b4
+      size: 1362
