@@ -1,5 +1,5 @@
 
-# 🧠 Sentiment Intelligence Pipeline (MLOps-Ready NLP Project)
+# 🧠 Sentiment Intelligence Pipeline
 
 **Author:** Prajwal (Data Scientist)  
 **Role Target:** Data Scientist   
@@ -8,7 +8,7 @@
 
 ## 📌 Project Overview
 
-This project is an **end-to-end NLP-based Sentiment Analysis system** built using **industry-grade Data Science and MLOps practices**.
+This project is an **end-to-end NLP-based Sentiment Analysis system**
 
 The goal of the project is not just to train a model, but to demonstrate:
 - A **reproducible ETL pipeline**
@@ -93,11 +93,6 @@ ml-project/
 - Lemmatization
 - Text Normalization
 
-### 🔁 MLOps
-- DVC (Data Version Control)
-- Reproducible Pipelines
-- Artifact Versioning
-- Dependency Tracking
 
 ### 🌐 Deployment
 - FastAPI
@@ -157,14 +152,7 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## 💡 Key Highlights
 
-✔ End-to-end ETL pipeline  
-✔ Fully reproducible ML workflow  
-✔ Real-world NLP preprocessing  
-✔ Production-grade API  
-✔ Cloud-ready deployment  
-✔ MLOps best practices applied  
 
 ---
 ## 📸 Project Output
